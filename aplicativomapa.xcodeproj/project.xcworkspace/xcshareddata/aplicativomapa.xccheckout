@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3C8796A0-E747-465B-8AF9-B35560F7ADB0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>aplicativomapa</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>450F11F2-10C1-49EC-937A-6F2886EB6D96</key>
+		<string>https://github.com/Andgfaria/Aplicativo-Mapa.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>aplicativomapa.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>450F11F2-10C1-49EC-937A-6F2886EB6D96</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Andgfaria/Aplicativo-Mapa.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>450F11F2-10C1-49EC-937A-6F2886EB6D96</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>450F11F2-10C1-49EC-937A-6F2886EB6D96</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Aplicativo-Mapa</string>
+		</dict>
+	</array>
+</dict>
+</plist>
