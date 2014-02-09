@@ -76,7 +76,6 @@
     gerenciador = [[GerenciadorConfiguracao alloc] init];
     configuracaoAtual = [[Configuracao alloc] init];
     configuracaoAtual = [gerenciador retornarConfiguracoes];
-    [configuracaoAtual exibirConfiguracoes];
     [_entradaConsumo setText:[[configuracaoAtual consumoLitro] stringValue]];
     [_entradaPreco setText:[[configuracaoAtual precoLitro] stringValue]];
     [_entradaGasto setText:[[configuracaoAtual gastoMaximo] stringValue]];
@@ -124,6 +123,7 @@
 }
 
 -(void) modificarEstiloMapa {
+
     if ([_seletorEstiloMapa selectedSegmentIndex] == 0) {
         [configuracaoAtual setPreferenciaEstiloMapa:@"normal"];
     }

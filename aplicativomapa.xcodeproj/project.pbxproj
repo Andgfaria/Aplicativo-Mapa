@@ -25,6 +25,7 @@
 		654F090118A30C3500CFF2BB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654F090018A30C3500CFF2BB /* MapKit.framework */; };
 		654F090418A30D5300CFF2BB /* Configuracao.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F090318A30D5300CFF2BB /* Configuracao.m */; };
 		654F090718A30E3C00CFF2BB /* GerenciadorConfiguracao.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F090618A30E3C00CFF2BB /* GerenciadorConfiguracao.m */; };
+		6595436418A81A5600C5939E /* Rota.m in Sources */ = {isa = PBXBuildFile; fileRef = 6595436318A81A5600C5939E /* Rota.m */; };
 		65AF0D1D18A3E63C00A3E33E /* ViewConfiguracoes.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AF0D1C18A3E63C00A3E33E /* ViewConfiguracoes.m */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,8 @@
 		654F090318A30D5300CFF2BB /* Configuracao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuracao.m; sourceTree = "<group>"; };
 		654F090518A30E3C00CFF2BB /* GerenciadorConfiguracao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GerenciadorConfiguracao.h; sourceTree = "<group>"; };
 		654F090618A30E3C00CFF2BB /* GerenciadorConfiguracao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GerenciadorConfiguracao.m; sourceTree = "<group>"; };
+		6595436218A81A5600C5939E /* Rota.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rota.h; path = aplicativomapa/Rota.h; sourceTree = SOURCE_ROOT; };
+		6595436318A81A5600C5939E /* Rota.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rota.m; path = aplicativomapa/Rota.m; sourceTree = SOURCE_ROOT; };
 		65AF0D1B18A3E63C00A3E33E /* ViewConfiguracoes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewConfiguracoes.h; sourceTree = "<group>"; };
 		65AF0D1C18A3E63C00A3E33E /* ViewConfiguracoes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewConfiguracoes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +143,8 @@
 				654F08E118A303F000CFF2BB /* Images.xcassets */,
 				65AF0D1B18A3E63C00A3E33E /* ViewConfiguracoes.h */,
 				65AF0D1C18A3E63C00A3E33E /* ViewConfiguracoes.m */,
+				6595436218A81A5600C5939E /* Rota.h */,
+				6595436318A81A5600C5939E /* Rota.m */,
 				654F08DF18A303F000CFF2BB /* ViewController.m */,
 				654F08D018A303EF00CFF2BB /* Supporting Files */,
 			);
@@ -276,6 +281,7 @@
 				654F08E018A303F000CFF2BB /* ViewController.m in Sources */,
 				654F08DA18A303F000CFF2BB /* AppDelegate.m in Sources */,
 				65AF0D1D18A3E63C00A3E33E /* ViewConfiguracoes.m in Sources */,
+				6595436418A81A5600C5939E /* Rota.m in Sources */,
 				654F090418A30D5300CFF2BB /* Configuracao.m in Sources */,
 				654F08D618A303EF00CFF2BB /* main.m in Sources */,
 			);
