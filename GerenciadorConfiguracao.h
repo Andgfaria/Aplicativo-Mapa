@@ -18,6 +18,7 @@
 -(void) carregarConfiguracoesPadrao;
 -(Configuracao *) retornarConfiguracoes;
 -(void)armazenarConfiguracoes:(Configuracao *)configuracoes;
+-(BOOL) aplicativoRodouPelaPrimeiraVez;
 
 
 @end

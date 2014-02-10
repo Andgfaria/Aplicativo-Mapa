@@ -52,4 +52,12 @@
     [configuracoesSalvas synchronize];
 }
 
+-(BOOL) aplicativoRodouPelaPrimeiraVez {
+    if ([configuracoesSalvas boolForKey:@"configuracoesJaSalvas"] == nil)
+    {
+        return true;
+    }
+    else return false;
+}
+
 @end

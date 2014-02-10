@@ -25,6 +25,7 @@
 		654F090118A30C3500CFF2BB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654F090018A30C3500CFF2BB /* MapKit.framework */; };
 		654F090418A30D5300CFF2BB /* Configuracao.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F090318A30D5300CFF2BB /* Configuracao.m */; };
 		654F090718A30E3C00CFF2BB /* GerenciadorConfiguracao.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F090618A30E3C00CFF2BB /* GerenciadorConfiguracao.m */; };
+		6555295218A935AE0030A357 /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6555295118A935AE0030A357 /* default.gpx */; };
 		6595436418A81A5600C5939E /* Rota.m in Sources */ = {isa = PBXBuildFile; fileRef = 6595436318A81A5600C5939E /* Rota.m */; };
 		6595436818A8468D00C5939E /* icone1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6595436518A8468D00C5939E /* icone1.png */; };
 		6595436918A8468D00C5939E /* icone2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6595436618A8468D00C5939E /* icone2.png */; };
@@ -68,6 +69,7 @@
 		654F090318A30D5300CFF2BB /* Configuracao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuracao.m; sourceTree = "<group>"; };
 		654F090518A30E3C00CFF2BB /* GerenciadorConfiguracao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GerenciadorConfiguracao.h; sourceTree = "<group>"; };
 		654F090618A30E3C00CFF2BB /* GerenciadorConfiguracao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GerenciadorConfiguracao.m; sourceTree = "<group>"; };
+		6555295118A935AE0030A357 /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		6595436218A81A5600C5939E /* Rota.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rota.h; path = aplicativomapa/Rota.h; sourceTree = SOURCE_ROOT; };
 		6595436318A81A5600C5939E /* Rota.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rota.m; path = aplicativomapa/Rota.m; sourceTree = SOURCE_ROOT; };
 		6595436518A8468D00C5939E /* icone1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone1.png; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		654F08BD18A303EF00CFF2BB = {
 			isa = PBXGroup;
 			children = (
+				6555295118A935AE0030A357 /* default.gpx */,
 				654F090218A30D5300CFF2BB /* Configuracao.h */,
 				654F090518A30E3C00CFF2BB /* GerenciadorConfiguracao.h */,
 				654F090618A30E3C00CFF2BB /* GerenciadorConfiguracao.m */,
@@ -271,6 +274,7 @@
 				654F08D418A303EF00CFF2BB /* InfoPlist.strings in Resources */,
 				654408C418A401870000B28B /* Main.storyboard in Resources */,
 				6595436918A8468D00C5939E /* icone2.png in Resources */,
+				6555295218A935AE0030A357 /* default.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

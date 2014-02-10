@@ -138,21 +138,33 @@ extern MKPlacemark *pl;
 }
 
 - (IBAction)tracarRotaUnica:(id)sender {
-    [self tracarPontoUnico:[_entradaPontoX text]];
-    [_viewRotaUnica setHidden:YES];
-    [_entradaPontoX resignFirstResponder];
+    if ([[_entradaPontoX text] isEqualToString:@""]) {
+        UIAlertView *mensagemErro = [[UIAlertView alloc] initWithTitle:@"Campo Vazio" message:@"O campo precisa receber um endereço para traçar uma rota." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [mensagemErro show];
+    }
+    else {
+        [self tracarPontoUnico:[_entradaPontoX text]];
+        [_viewRotaUnica setHidden:YES];
+        [_entradaPontoX resignFirstResponder];
+    }
 }
 
 - (IBAction)limparRotas:(id)sender {
-    [_worldMap removeAnnotations:[_worldMap annotations]];
-    [_worldMap removeOverlays:[_worldMap overlays]];
-    ultimaRotaPesquisada = nil;
-    [_botaoInformacoesUltimaRota setEnabled:NO];
-    [_botaoInformacoesUltimaRota setHidden:YES];
-    [_botaoLimparRotas setHidden:YES];
+    UIAlertView *mensagemConfirmacao = [[UIAlertView alloc] initWithTitle:@"Limpar Rota" message:@"Deseja remover a rota do mapa?" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+    [mensagemConfirmacao show];
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [_worldMap removeAnnotations:[_worldMap annotations]];
+        [_worldMap removeOverlays:[_worldMap overlays]];
+        ultimaRotaPesquisada = nil;
+        [_botaoInformacoesUltimaRota setEnabled:NO];
+        [_botaoInformacoesUltimaRota setHidden:YES];
+        [_botaoLimparRotas setHidden:YES];
 
+    }
+}
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -167,7 +179,7 @@ extern MKPlacemark *pl;
     }
     else {
         [self mostrarIndicadorAtividade];
-
+        [self tracarRotaComPontoA:[_entradaPontoA text] ePontoB:[_entradaPontoB text]];
         [_viewRotas setHidden:YES];
     }
 }
@@ -233,17 +245,85 @@ extern MKPlacemark *pl;
                     mapItemO = item;
                 }
                 pontoX = [self converterMKMapItemParaCLLocation:mapItemO];
+                annotation.title = endereco;
+                [annotation setCoordinate:mapItemO.placemark.coordinate];
+                [_worldMap addAnnotation:annotation];
+                [self pegarDirecoesAPartirDaLocalizacaoAtual:mapItemO];
+                [self atualizarUltimaRotaComPontoA:locAtual ePontoB:pontoX];
+                [self atualizarInformacoesDaUltimaRota];
+                [_botaoInformacoesUltimaRota setEnabled:YES];
+                [_botaoInformacoesUltimaRota setHidden:NO];
+                [_botaoLimparRotas setHidden:NO];
+                [self ocultarIndicadorAtividade];
             }
-            annotation.title = endereco;
-            [annotation setCoordinate:mapItemO.placemark.coordinate];
-            [_worldMap addAnnotation:annotation];
-            [self pegarDirecoesAPartirDaLocalizacaoAtual:mapItemO];
-            [self atualizarUltimaRotaComPontoA:locAtual ePontoB:pontoX];
-            [self atualizarInformacoesDaUltimaRota];
-            [_botaoInformacoesUltimaRota setEnabled:YES];
-            [_botaoInformacoesUltimaRota setHidden:NO];
-            [_botaoLimparRotas setHidden:NO];
-            [self ocultarIndicadorAtividade];
+       
+        }
+    }];
+}
+
+-(void) tracarRotaComPontoA:(NSString *)endereco1 ePontoB:(NSString *)endereco2 {
+    [self mostrarIndicadorAtividade];
+    [_botaoInformacoesUltimaRota setEnabled:NO];
+    [_worldMap removeOverlays:[_worldMap overlays]];
+    [_worldMap removeAnnotations:[_worldMap annotations]];
+    MKLocalSearchRequest *request =
+    [[MKLocalSearchRequest alloc] init];
+    request.naturalLanguageQuery = endereco1;
+    request.region = _worldMap.region;
+    CLLocation __block *pontoA;
+    CLLocation __block *pontoB;
+    CLLocation *locAtual = [self retornarLocalizacaoAtual];
+    MKLocalSearch *search = [[MKLocalSearch alloc]initWithRequest:request];
+    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
+        if (response.mapItems.count == 0) {
+            NSLog(@"No Matches");
+        }
+        else {
+            MKPointAnnotation *annotation =
+            [[MKPointAnnotation alloc] init];
+            MKMapItem *mapItemO = [[response mapItems] objectAtIndex:0];
+            CLLocation *localizacaoMaisPerto = [[CLLocation alloc] initWithLatitude:mapItemO.placemark.coordinate.latitude longitude:mapItemO.placemark.coordinate.longitude];
+            for (MKMapItem *item in response.mapItems) {
+                CLLocation *localizaoItem = [[CLLocation alloc] initWithLatitude:item.placemark.coordinate.latitude longitude:item.placemark.coordinate.latitude];
+                if ([locAtual distanceFromLocation:localizacaoMaisPerto] > [locAtual distanceFromLocation:localizaoItem]) {
+                    localizacaoMaisPerto = localizaoItem;
+                    mapItemO = item;
+                }
+                MKLocalSearchRequest *request2 = [[MKLocalSearchRequest alloc] init];
+                request2.naturalLanguageQuery = endereco2;
+                request2.region = _worldMap.region;
+                MKLocalSearch *search2 = [[MKLocalSearch alloc] init];
+                [search2 startWithCompletionHandler:^(MKLocalSearchResponse *response2, NSError *error2) {
+                    if (response2.mapItems.count == 0) {
+                        NSLog(@"No Matches");
+                    }
+                    else {
+                        MKPointAnnotation *annotation2 = [[MKPointAnnotation alloc] init];
+                        MKMapItem *mapItem1 = [[response2 mapItems] objectAtIndex:0];
+                         CLLocation *localizacaoMaisPerto2 = [[CLLocation alloc] initWithLatitude:mapItem1.placemark.coordinate.latitude longitude:mapItem1.placemark.coordinate.longitude];
+                        for (MKMapItem *item2 in response.mapItems) {
+                            CLLocation *localizaoItem2 = [[CLLocation alloc] initWithLatitude:item2.placemark.coordinate.latitude longitude:item2.placemark.coordinate.latitude];
+                            if ([locAtual distanceFromLocation:localizacaoMaisPerto2] > [locAtual distanceFromLocation:localizaoItem2]) {
+                                localizacaoMaisPerto2 = localizaoItem;
+                                mapItem1 = item;
+                            }
+                        pontoA = [self converterMKMapItemParaCLLocation:mapItemO];
+                        pontoB = [self converterMKMapItemParaCLLocation:mapItem1];
+                        annotation2.title = endereco2;
+                        [annotation2 setCoordinate:mapItem1.placemark.coordinate];
+                        [_worldMap addAnnotation:annotation2];
+                        [self pegarDirecoesAPartirDaLocalizacaoAtual:mapItem1];
+                        [self atualizarUltimaRotaComPontoA:pontoA ePontoB:pontoB];
+                        [self atualizarInformacoesDaUltimaRota];
+                        [_botaoInformacoesUltimaRota setEnabled:YES];
+                        [_botaoInformacoesUltimaRota setHidden:NO];
+                        [_botaoLimparRotas setHidden:NO];
+                        [self ocultarIndicadorAtividade];
+
+                        }
+                    }
+                }];
+        }
         }
     }];
     
@@ -265,7 +345,6 @@ extern MKPlacemark *pl;
              UIAlertView *popUpErro = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível calcular a rota." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
              [popUpErro show];
          } else {
-             NSLog(@"Entrei aqui");
              [self showRoute:response];
          }
      }];
@@ -326,4 +405,6 @@ extern MKPlacemark *pl;
 - (IBAction)exibirInformacoesUltimaRota:(id)sender {
     [_informacoesUltimaRota setHidden:NO];
 }
+
+
 @end
