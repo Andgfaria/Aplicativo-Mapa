@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
-#include "GerenciadorConfiguracao.h"
+#import "GerenciadorConfiguracao.h"
+#import "Rota.h"
 
 @interface ViewController : UIViewController {
     CLLocationManager *localizador;
     GerenciadorConfiguracao *configuracoesSalvas;
     MKMapItem *ponto;
-    CLLocationDistance *distanciaUltimaRota;
-    double custoUltimaRota;
+    Rota *ultimaRotaPesquisada;
 }
 @property (weak, nonatomic) IBOutlet MKMapView *worldMap;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicadorAtividade;
@@ -30,7 +30,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *botaoToolbar3;
 @property (weak, nonatomic) IBOutlet UITextField *entradaPontoA;
 @property (weak, nonatomic) IBOutlet UITextField *entradaPontoB;
-- (IBAction)rotaUnica:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *viewRotas;
 @property (weak, nonatomic) IBOutlet UIButton *botaoTracarRotas;
@@ -42,11 +41,24 @@
 
 - (IBAction)mostrarViewRotaUnica:(id)sender;
 - (IBAction)tracarRotaUnica:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *botaoLimparRotas;
 
-- (IBAction)limparAnotacoes:(id)sender;
+- (IBAction)limparRotas:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIView *viewIndicadorAtividade;
 
--(void) mostrarIndicadorAtividade;
--(void) ocultarIndicadoratividade;
+@property (weak, nonatomic) IBOutlet UIView *informacoesUltimaRota;
+@property (weak, nonatomic) IBOutlet UIButton *botaoInformacoesUltimaRota;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *txtDistanciaUltimaRota;
+- (IBAction)exibirInformacoesUltimaRota:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *txtCustoUltimaRota;
+
+@property (weak, nonatomic) IBOutlet UILabel *txtLimiteExcedido;
+
+- (IBAction)ocultarInformacoesUltimaRota:(id)sender;
+
 
 @end

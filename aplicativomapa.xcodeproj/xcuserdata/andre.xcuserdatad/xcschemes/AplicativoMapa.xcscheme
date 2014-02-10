@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "654F08C518A303EF00CFF2BB"
-               BuildableName = "AplicativoMapa.app"
+               BuildableName = "Gastos de Combusti&#769;vel.app"
                BlueprintName = "AplicativoMapa"
                ReferencedContainer = "container:aplicativomapa.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "654F08C518A303EF00CFF2BB"
-            BuildableName = "AplicativoMapa.app"
+            BuildableName = "Gastos de Combusti&#769;vel.app"
             BlueprintName = "AplicativoMapa"
             ReferencedContainer = "container:aplicativomapa.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "654F08C518A303EF00CFF2BB"
-            BuildableName = "AplicativoMapa.app"
+            BuildableName = "Gastos de Combusti&#769;vel.app"
             BlueprintName = "AplicativoMapa"
             ReferencedContainer = "container:aplicativomapa.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "654F08C518A303EF00CFF2BB"
-            BuildableName = "AplicativoMapa.app"
+            BuildableName = "Gastos de Combusti&#769;vel.app"
             BlueprintName = "AplicativoMapa"
             ReferencedContainer = "container:aplicativomapa.xcodeproj">
          </BuildableReference>
