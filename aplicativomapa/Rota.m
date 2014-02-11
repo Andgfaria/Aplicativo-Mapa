@@ -20,14 +20,19 @@
 }
 
 -(NSNumber *) calcularDistancia {
-    NSNumber *distancia = [[NSNumber alloc] initWithDouble:[pontoA distanceFromLocation:pontoB]];
+    double d = [pontoA distanceFromLocation:pontoB];
+    NSNumber *distancia = [[NSNumber alloc] initWithDouble:(d/1000)];
     return distancia;
 }
 
 -(NSNumber *) calcularCusto {
     GerenciadorConfiguracao *configuracoes = [[GerenciadorConfiguracao alloc] init];
-    NSNumber *custo = [[NSNumber alloc] initWithDouble:(([[self calcularDistancia] doubleValue] / [[[configuracoes retornarConfiguracoes] consumoLitro] doubleValue]) * [[[configuracoes retornarConfiguracoes] precoLitro] doubleValue] / 10)];
+    NSNumber *custo = [[NSNumber alloc] initWithDouble:(([[self calcularDistancia] doubleValue] / [[[configuracoes retornarConfiguracoes] consumoLitro] doubleValue]) * [[[configuracoes retornarConfiguracoes] precoLitro] doubleValue])];
     return custo;
+}
+
+-(void) imprimirEnderecos {
+    NSLog(@"Ponto a: %@\n Ponto b: %@ ",pontoA,pontoB);
 }
 
 @end

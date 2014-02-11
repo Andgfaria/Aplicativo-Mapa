@@ -20,6 +20,7 @@
 -(Rota *) initWithPontoA:(CLLocation *)pA ePontoB:(CLLocation *)pB;
 -(NSNumber *) calcularDistancia;
 -(NSNumber *) calcularCusto;
+-(void) imprimirEnderecos;
 
 @property CLLocation *pontoA;
 @property CLLocation *pontoB;
