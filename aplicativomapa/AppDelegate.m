@@ -7,13 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "GerenciadorConfiguracao.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    GerenciadorConfiguracao *gerenciador = [[GerenciadorConfiguracao alloc] init];
+    if ([gerenciador aplicativoRodouPelaPrimeiraVez]) {
+        [gerenciador carregarConfiguracoesPadrao];
+    }
     // Override point for customization after application launch.
     return YES;
 }

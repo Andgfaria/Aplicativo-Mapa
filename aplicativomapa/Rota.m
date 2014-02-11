@@ -26,7 +26,7 @@
 
 -(NSNumber *) calcularCusto {
     GerenciadorConfiguracao *configuracoes = [[GerenciadorConfiguracao alloc] init];
-    NSNumber *custo = [[NSNumber alloc] initWithDouble:(([[self calcularDistancia] doubleValue] / [[[configuracoes retornarConfiguracoes] consumoLitro] doubleValue]) * [[[configuracoes retornarConfiguracoes] precoLitro] doubleValue])];
+    NSNumber *custo = [[NSNumber alloc] initWithDouble:(([[self calcularDistancia] doubleValue] / [[[configuracoes retornarConfiguracoes] consumoLitro] doubleValue]) * [[[configuracoes retornarConfiguracoes] precoLitro] doubleValue] / 10)];
     return custo;
 }
 

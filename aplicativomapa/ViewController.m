@@ -230,8 +230,12 @@ extern MKPlacemark *pl;
     MKLocalSearch *search = [[MKLocalSearch alloc]initWithRequest:request];
     [search startWithCompletionHandler:^(MKLocalSearchResponse
                                          *response, NSError *error) {
-        if (response.mapItems.count == 0)
-            NSLog(@"No Matches");
+        if (response.mapItems.count == 0){
+            [_indicadorAtividade stopAnimating];
+            [_viewIndicadorAtividade setHidden:YES];
+            UIAlertView *erro = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível traçar a rota." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [erro show];
+        }
         else
         {
             MKPointAnnotation *annotation =
@@ -276,7 +280,10 @@ extern MKPlacemark *pl;
     MKLocalSearch *search = [[MKLocalSearch alloc]initWithRequest:request];
     [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
         if (response.mapItems.count == 0) {
-            NSLog(@"No Matches");
+            [_indicadorAtividade stopAnimating];
+            [_viewIndicadorAtividade setHidden:YES];
+            UIAlertView *erro = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível traçar a rota." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [erro show];
         }
         else {
             MKPointAnnotation *annotation =
@@ -289,36 +296,43 @@ extern MKPlacemark *pl;
                     localizacaoMaisPerto = localizaoItem;
                     mapItemO = item;
                 }
+                
                 MKLocalSearchRequest *request2 = [[MKLocalSearchRequest alloc] init];
                 request2.naturalLanguageQuery = endereco2;
                 request2.region = _worldMap.region;
                 MKLocalSearch *search2 = [[MKLocalSearch alloc] init];
                 [search2 startWithCompletionHandler:^(MKLocalSearchResponse *response2, NSError *error2) {
                     if (response2.mapItems.count == 0) {
-                        NSLog(@"No Matches");
+                        [_indicadorAtividade stopAnimating];
+                        [_viewIndicadorAtividade setHidden:YES];
+                        UIAlertView *erro = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível traçar a rota." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        [erro show];
                     }
                     else {
                         MKPointAnnotation *annotation2 = [[MKPointAnnotation alloc] init];
                         MKMapItem *mapItem1 = [[response2 mapItems] objectAtIndex:0];
                          CLLocation *localizacaoMaisPerto2 = [[CLLocation alloc] initWithLatitude:mapItem1.placemark.coordinate.latitude longitude:mapItem1.placemark.coordinate.longitude];
-                        for (MKMapItem *item2 in response.mapItems) {
+                        for (MKMapItem *item2 in response2.mapItems) {
                             CLLocation *localizaoItem2 = [[CLLocation alloc] initWithLatitude:item2.placemark.coordinate.latitude longitude:item2.placemark.coordinate.latitude];
                             if ([locAtual distanceFromLocation:localizacaoMaisPerto2] > [locAtual distanceFromLocation:localizaoItem2]) {
-                                localizacaoMaisPerto2 = localizaoItem;
-                                mapItem1 = item;
+                                localizacaoMaisPerto2 = localizaoItem2;
                             }
-                        pontoA = [self converterMKMapItemParaCLLocation:mapItemO];
-                        pontoB = [self converterMKMapItemParaCLLocation:mapItem1];
-                        annotation2.title = endereco2;
-                        [annotation2 setCoordinate:mapItem1.placemark.coordinate];
-                        [_worldMap addAnnotation:annotation2];
-                        [self pegarDirecoesAPartirDaLocalizacaoAtual:mapItem1];
-                        [self atualizarUltimaRotaComPontoA:pontoA ePontoB:pontoB];
-                        [self atualizarInformacoesDaUltimaRota];
-                        [_botaoInformacoesUltimaRota setEnabled:YES];
-                        [_botaoInformacoesUltimaRota setHidden:NO];
-                        [_botaoLimparRotas setHidden:NO];
-                        [self ocultarIndicadorAtividade];
+                                mapItem1 = item2;
+                                pontoA = [self converterMKMapItemParaCLLocation:mapItemO];
+                                pontoB = [self converterMKMapItemParaCLLocation:mapItem1];
+                                annotation.title = endereco1;
+                                [annotation setCoordinate:mapItemO.placemark.coordinate];
+                                [_worldMap addAnnotation:annotation];
+                                annotation2.title = endereco2;
+                                [annotation2 setCoordinate:mapItem1.placemark.coordinate];
+                                [_worldMap addAnnotation:annotation2];
+                            [self pegarDirecoesDe:mapItemO para:mapItem1];
+                                [self atualizarUltimaRotaComPontoA:pontoA ePontoB:pontoB];
+                                [self atualizarInformacoesDaUltimaRota];
+                                [_botaoInformacoesUltimaRota setEnabled:YES];
+                                [_botaoInformacoesUltimaRota setHidden:NO];
+                                [_botaoLimparRotas setHidden:NO];
+                                [self ocultarIndicadorAtividade];
 
                         }
                     }
@@ -327,6 +341,22 @@ extern MKPlacemark *pl;
         }
     }];
     
+}
+
+-(void) pegarDirecoesDe:(MKMapItem *)pontoA para:(MKMapItem *) pontoB {
+    MKDirectionsRequest *request =
+    [[MKDirectionsRequest alloc] init];
+    request.source = pontoA;
+    request.destination = pontoB;
+    request.requestsAlternateRoutes = NO;
+    MKDirections *directions =
+    [[MKDirections alloc] initWithRequest:request];
+    
+    [directions calculateDirectionsWithCompletionHandler:
+     ^(MKDirectionsResponse *response, NSError *error) {
+             [self showRoute:response];
+     }];
+
 }
 
 - (void)pegarDirecoesAPartirDaLocalizacaoAtual:(MKMapItem *)destino
@@ -375,7 +405,7 @@ extern MKPlacemark *pl;
     [formatter setMaximumFractionDigits:3];
     NSMutableString *distancia = [[NSMutableString alloc] initWithString:@"Distância: "];
     [distancia appendString:[formatter stringFromNumber:[ultimaRotaPesquisada calcularDistancia]]];
-    [distancia appendString:@" Km"];
+    [distancia appendString:@" m"];
     [_txtDistanciaUltimaRota setText:distancia];
     NSMutableString *custo = [[NSMutableString alloc] initWithString:@"Custo: R"];
     [formatter setMaximumFractionDigits:2];
