@@ -11,6 +11,7 @@
 #import "Configuracao.h"
 #import <MapKit/MapKit.h>
 #import <math.h>
+#import "ViewConfiguracoes.h"
 
 @interface ViewController ()
 
@@ -80,7 +81,7 @@ extern MKPlacemark *pl;
     [_toolBar setBackgroundColor:[UIColor whiteColor]];
     [_botaoToolbar1 setTintColor:[UIColor orangeColor]];
     [_botaoToolbar2 setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    [_botaoToolbar3 setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    [_botaoToolbar3 setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [_viewRotas setBackgroundColor:[UIColor whiteColor]];
     [_botaoTracarRotas setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [_viewRotaUnica setBackgroundColor:[UIColor whiteColor]];
@@ -97,8 +98,8 @@ extern MKPlacemark *pl;
     [_indicadorAtividade setColor:[UIColor whiteColor]];
     [_toolBar setBackgroundColor:[UIColor orangeColor]];
     [_botaoToolbar1 setTintColor:[UIColor whiteColor]];
-    [_botaoToolbar2 setTintColor:[UIColor whiteColor]];
-    [_botaoToolbar3 setTintColor:[UIColor whiteColor]];
+    [_botaoToolbar2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_botaoToolbar3 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_viewRotas setBackgroundColor:[UIColor orangeColor]];
     [_botaoTracarRotas setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_viewRotaUnica setBackgroundColor:[UIColor orangeColor]];
@@ -434,6 +435,10 @@ extern MKPlacemark *pl;
 }
 - (IBAction)exibirInformacoesUltimaRota:(id)sender {
     [_informacoesUltimaRota setHidden:NO];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    ViewConfiguracoes *view = [segue destinationViewController];
 }
 
 -(IBAction)unwind:(UIStoryboardSegue *)sender{
