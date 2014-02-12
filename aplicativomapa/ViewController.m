@@ -438,6 +438,7 @@ extern MKPlacemark *pl;
 
 -(IBAction)unwind:(UIStoryboardSegue *)sender{
     [self setarTema];
+    [self setarEstiloMapa];
 }
 
 @end
