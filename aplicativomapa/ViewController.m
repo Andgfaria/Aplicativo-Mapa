@@ -274,8 +274,8 @@ extern MKPlacemark *pl;
     [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = endereco1;
     request.region = _worldMap.region;
-    CLLocation __block *pontoA;
-    CLLocation __block *pontoB;
+    CLLocation __block *pontoA = nil;
+    CLLocation __block *pontoB = nil;
     CLLocation *locAtual = [self retornarLocalizacaoAtual];
     MKLocalSearch *search = [[MKLocalSearch alloc]initWithRequest:request];
     [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
@@ -300,7 +300,7 @@ extern MKPlacemark *pl;
                 MKLocalSearchRequest *request2 = [[MKLocalSearchRequest alloc] init];
                 request2.naturalLanguageQuery = endereco2;
                 request2.region = _worldMap.region;
-                MKLocalSearch *search2 = [[MKLocalSearch alloc] init];
+                MKLocalSearch *search2 = [[MKLocalSearch alloc] initWithRequest:request2];
                 [search2 startWithCompletionHandler:^(MKLocalSearchResponse *response2, NSError *error2) {
                     if (response2.mapItems.count == 0) {
                         [_indicadorAtividade stopAnimating];
@@ -316,8 +316,9 @@ extern MKPlacemark *pl;
                             CLLocation *localizaoItem2 = [[CLLocation alloc] initWithLatitude:item2.placemark.coordinate.latitude longitude:item2.placemark.coordinate.latitude];
                             if ([locAtual distanceFromLocation:localizacaoMaisPerto2] > [locAtual distanceFromLocation:localizaoItem2]) {
                                 localizacaoMaisPerto2 = localizaoItem2;
-                            }
                                 mapItem1 = item2;
+                            }
+                        }
                                 pontoA = [self converterMKMapItemParaCLLocation:mapItemO];
                                 pontoB = [self converterMKMapItemParaCLLocation:mapItem1];
                                 annotation.title = endereco1;
@@ -334,7 +335,6 @@ extern MKPlacemark *pl;
                                 [_botaoLimparRotas setHidden:NO];
                                 [self ocultarIndicadorAtividade];
 
-                        }
                     }
                 }];
         }
@@ -436,5 +436,8 @@ extern MKPlacemark *pl;
     [_informacoesUltimaRota setHidden:NO];
 }
 
+-(IBAction)unwind:(UIStoryboardSegue *)sender{
+    [self setarTema];
+}
 
 @end
